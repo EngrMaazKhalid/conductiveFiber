@@ -83,7 +83,7 @@ input[type=number] {
 }
 table{
     display:flex ;
-    width: 50%;
+    width: 40%;
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;
@@ -136,16 +136,20 @@ table{
     flex-wrap: wrap;
     width: 50%;
 }
+
 @media( max-width: 880px){
     .lower-div{
         flex-direction: column;
+        justify-content: center;
+        align-items: center;
     }
     .left-div{
         width: 100%;
         margin-bottom: 20px;
     }
     .right-div{
-        width: 100%;
+    
+        width: 80%;
         margin-bottom: 30px;
     }
 }

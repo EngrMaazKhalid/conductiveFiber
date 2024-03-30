@@ -26,7 +26,7 @@
     <button class="generate-btn" onclick="generateGraph()">Generate Graph</button>
 </div>
 <div class="right-div">
-    <canvas id="myChart"></canvas>
+    <canvas class="chart" id="myChart"></canvas>
 </div>
 </div>
 </div>
@@ -73,7 +73,7 @@
                 data: {
                     labels: xValues,
                     datasets: [{
-                        label: 'Dataset',
+                        label: 'Voltage',
                         data: yValues,
                         fill: false,
                         borderColor: 'rgb(75, 192, 192)',

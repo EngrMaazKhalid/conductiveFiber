@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="./style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
+    <title>Dynamic Table and Graph</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="container">
+    <div class="upper-div">
+  <h1>DASHBOARD</h1>
+  <h5>Development of Conductive Fibre for Application into wearable Electronics</h5>
+    </div>
+    <div class="lower-div">
+    <div class="left-div">
+    <input class="rowCount" type="number" id="rowCount" placeholder="Enter number of readings">
+    <button class="table-btn" onclick="generateTable()">Create Table</button>
+    <table id="data-table">
+       
+        <!-- Dynamic table will be generated here -->
+    </table>
+    <button class="generate-btn" onclick="generateGraph()">Generate Graph</button>
+</div>
+<div class="right-div">
+    <canvas id="myChart"></canvas>
+</div>
+</div>
+</div>
+    <script>
+         var myChart = null; // Initialize chart variable
+
+        function generateTable() {
+            var rowCount = document.getElementById('rowCount').value;
+            var table = document.getElementById('data-table');
+            table.innerHTML = ''; // Clear the table
+
+            var header = table.createTHead();
+    var row = header.insertRow(0);
+    var cell1 = row.insertCell(0);
+    var cell2 = row.insertCell(1);
+    cell1.innerHTML = '<b>Time(t) </b>';
+    cell2.innerHTML = '<b>Voltage(V) </b>';
+
+
+            for(var i = 0; i < rowCount; i++) {
+                var row = table.insertRow(i+1);
+                var cell1 = row.insertCell(0);
+                var cell2 = row.insertCell(1);
+                cell1.innerHTML = '<input class="table-inp" type="number" id="x'+i+'">';
+                cell2.innerHTML = '<input class="table-inp" type="number" id="y'+i+'">';
+            }
+        }
+
+        function generateGraph() {
+            var rowCount = document.getElementById('rowCount').value;
+            var xValues = [];
+            var yValues = [];
+            for(var i = 0; i < rowCount; i++) {
+                xValues.push(document.getElementById('x'+i).value);
+                yValues.push(document.getElementById('y'+i).value);
+            }
+            var ctx = document.getElementById('myChart').getContext('2d');
+            if (myChart) {
+                myChart.destroy(); // Destroy the old chart before creating a new one
+            }
+
+             myChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: xValues,
+                    datasets: [{
+                        label: 'Dataset',
+                        data: yValues,
+                        fill: false,
+                        borderColor: 'rgb(75, 192, 192)',
+                        tension: 0.1
+                    }]
+                }
+            });
+        }
+    </script>
+</body>
+</html>
